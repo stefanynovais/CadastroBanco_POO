@@ -1,5 +1,160 @@
 package src.objetos.telas;
 
-public class Janela {
-    
+import javax.swing.*;
+
+public class Janela extends JFrame {
+    // Componentes
+    private JLabel jlAgencia;
+    private JTextField jtfAgencia;
+    private JLabel jlConta;
+    private JTextField jtfConta;
+    private JSeparator jSeparator01;
+    private JLabel jlNome;
+    private JTextField jtfNome;
+    private JLabel jlEndereco;
+    private JTextField jtfEndereco;
+    private JLabel jlTelefone;
+    private JTextField jtfTelefone;
+    private JLabel jlCpf;
+    private JTextField jtfCpf;
+    private JRadioButton jrbCorrente;
+    private JRadioButton jrbPoupanca;
+    private ButtonGroup bgContas;
+    private JSeparator jSeparator02;
+    private JButton jbConsultar;
+    private JButton jbAtualizar;
+    private JButton jbFechar;
+
+    // Construtor
+    public Janela() {
+        setTitle("Java Swing - Desenvolvimento de Sistemas");
+        setSize(400, 255);
+        setResizable(false);
+        getContentPane().setLayout(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        centralizar();
+
+        inicializarComponentes();
+    }
+
+    private void centralizar() {
+        Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+        Dimension janela = getSize();
+
+        if (janela.height > screen.height)
+            setSize(janela.width, screen.height);
+        if (janela.width > screen.width)
+            setSize(screen.width, janela.height);
+
+        setLocation((screen.width - janela.width) / 2,
+                (screen.height - janela.height) / 2);
+    }
+
+    private void inicializarComponentes() {
+        // Agência
+        jlAgencia = new JLabel("Código da Agência");
+        jlAgencia.setBounds(10, 10, 110, 18);
+        getContentPane().add(jlAgencia);
+
+        jtfAgencia = new JTextField();
+        jtfAgencia.setBounds(125, 10, 50, 20);
+        getContentPane().add(jtfAgencia);
+
+        // Conta
+        jlConta = new JLabel("Número da Conta");
+        jlConta.setBounds(205, 10, 105, 18);
+        getContentPane().add(jlConta);
+
+        jtfConta = new JTextField();
+        jtfConta.setBounds(315, 10, 60, 20);
+        getContentPane().add(jtfConta);
+
+        // Separador 1
+        jSeparator01 = new JSeparator();
+        jSeparator01.setBounds(10, 40, 365, 10);
+        getContentPane().add(jSeparator01);
+
+        // Nome
+        jlNome = new JLabel("Nome:");
+        jlNome.setBounds(10, 50, 60, 18);
+        jlNome.setHorizontalAlignment(SwingConstants.RIGHT);
+        getContentPane().add(jlNome);
+
+        jtfNome = new JTextField();
+        jtfNome.setBounds(75, 50, 300, 20);
+        getContentPane().add(jtfNome);
+
+        // Endereço
+        jlEndereco = new JLabel("Endereço:");
+        jlEndereco.setBounds(10, 75, 60, 18);
+        jlEndereco.setHorizontalAlignment(SwingConstants.RIGHT);
+        getContentPane().add(jlEndereco);
+
+        jtfEndereco = new JTextField();
+        jtfEndereco.setBounds(75, 75, 300, 20);
+        getContentPane().add(jtfEndereco);
+
+        // Telefone
+        jlTelefone = new JLabel("Telefone:");
+        jlTelefone.setBounds(10, 100, 60, 18);
+        jlTelefone.setHorizontalAlignment(SwingConstants.RIGHT);
+        getContentPane().add(jlTelefone);
+
+        jtfTelefone = new JTextField();
+        jtfTelefone.setBounds(75, 100, 300, 20);
+        getContentPane().add(jtfTelefone);
+
+        // CPF
+        jlCpf = new JLabel("CPF:");
+        jlCpf.setBounds(10, 125, 60, 18);
+        jlCpf.setHorizontalAlignment(SwingConstants.RIGHT);
+        getContentPane().add(jlCpf);
+
+        jtfCpf = new JTextField();
+        jtfCpf.setBounds(75, 125, 300, 20);
+        getContentPane().add(jtfCpf);
+
+        // Radio Buttons
+        jrbCorrente = new JRadioButton("Conta Corrente");
+        jrbCorrente.setBounds(100, 150, 111, 20);
+        jrbCorrente.setMnemonic('C'); // Alt + C
+        jrbCorrente.setSelected(true);
+        getContentPane().add(jrbCorrente);
+
+        jrbPoupanca = new JRadioButton("Conta Poupança");
+        jrbPoupanca.setBounds(225, 150, 118, 20);
+        jrbPoupanca.setMnemonic('P'); // Alt + P
+        getContentPane().add(jrbPoupanca);
+
+        bgContas = new ButtonGroup();
+        bgContas.add(jrbCorrente);
+        bgContas.add(jrbPoupanca);
+
+        // Separador 2
+        jSeparator02 = new JSeparator();
+        jSeparator02.setBounds(10, 180, 365, 10);
+        getContentPane().add(jSeparator02);
+
+        // Botões
+        jbConsultar = new JButton("Consultar");
+        jbConsultar.setBounds(35, 190, 100, 23);
+        jbConsultar.setMnemonic('S'); // Alt + S
+        getContentPane().add(jbConsultar);
+
+        jbAtualizar = new JButton("Atualizar");
+        jbAtualizar.setBounds(145, 190, 100, 23);
+        jbAtualizar.setMnemonic('A'); // Alt + A
+        jbAtualizar.setEnabled(false);
+        getContentPane().add(jbAtualizar);
+
+        jbFechar = new JButton("Fechar");
+        jbFechar.setBounds(255, 190, 100, 23);
+        jbFechar.setMnemonic('F'); // Alt + F
+        getContentPane().add(jbFechar);
+    }
+
+    public static void main(String[] args) {
+        Janela janela = new Janela();
+        janela.setVisible(true);
+    }
 }
