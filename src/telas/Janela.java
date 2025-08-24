@@ -1,6 +1,8 @@
-package src.objetos.telas;
+package src.telas;
 
 import javax.swing.*;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 
 public class Janela extends JFrame {
     // Componentes
@@ -117,13 +119,20 @@ public class Janela extends JFrame {
         // Radio Buttons
         jrbCorrente = new JRadioButton("Conta Corrente");
         jrbCorrente.setBounds(100, 150, 111, 20);
-        jrbCorrente.setMnemonic('C'); // Alt + C
+        jrbCorrente.setMnemonic('C');
         jrbCorrente.setSelected(true);
+        jrbCorrente.addActionListener(e -> {
+            JOptionPane.showMessageDialog(this, "Conta Corrente selecionada!");
+        });
+
         getContentPane().add(jrbCorrente);
 
         jrbPoupanca = new JRadioButton("Conta Poupança");
         jrbPoupanca.setBounds(225, 150, 118, 20);
-        jrbPoupanca.setMnemonic('P'); // Alt + P
+        jrbPoupanca.setMnemonic('P');
+        jrbPoupanca.addActionListener(e -> {
+            JOptionPane.showMessageDialog(this, "Conta Poupança selecionada!");
+        });
         getContentPane().add(jrbPoupanca);
 
         bgContas = new ButtonGroup();
@@ -135,21 +144,60 @@ public class Janela extends JFrame {
         jSeparator02.setBounds(10, 180, 365, 10);
         getContentPane().add(jSeparator02);
 
+        
         // Botões
+
+        //Consultar
         jbConsultar = new JButton("Consultar");
         jbConsultar.setBounds(35, 190, 100, 23);
-        jbConsultar.setMnemonic('S'); // Alt + S
+        jbConsultar.setMnemonic('S');
+        jbConsultar.addActionListener(e -> {
+            JOptionPane.showMessageDialog(this, "Consultando dados...");
+        });
         getContentPane().add(jbConsultar);
 
+        //Atualizar
+        jbConsultar.addActionListener(e -> {
+            String agencia = jtfAgencia.getText();
+            String conta = jtfConta.getText();
+            String nome = jtfNome.getText();
+            String endereco = jtfEndereco.getText();
+            String telefone = jtfTelefone.getText();
+            String cpf = jtfCpf.getText();
+            String tipoConta = jrbCorrente.isSelected() ? "Conta Corrente" : "Conta Poupança";
+
+            JOptionPane.showMessageDialog(this,
+                    "Agência: " + agencia +
+                            "\nConta: " + conta +
+                            "\nNome: " + nome +
+                            "\nEndereço: " + endereco +
+                            "\nTelefone: " + telefone +
+                            "\nCPF: " + cpf +
+                            "\nTipo: " + tipoConta,
+                             "Atualização", JOptionPane.INFORMATION_MESSAGE);
+
+            jbAtualizar.setEnabled(true);
+        });
         jbAtualizar = new JButton("Atualizar");
         jbAtualizar.setBounds(145, 190, 100, 23);
-        jbAtualizar.setMnemonic('A'); // Alt + A
+        jbAtualizar.setMnemonic('A');
         jbAtualizar.setEnabled(false);
         getContentPane().add(jbAtualizar);
 
+        jbAtualizar.addActionListener(e -> {
+
+            JOptionPane.showMessageDialog(this,
+                    "Dados atualizados com sucesso!",
+                    "Atualizar", JOptionPane.INFORMATION_MESSAGE);
+        });
+
+        //Fechar
         jbFechar = new JButton("Fechar");
         jbFechar.setBounds(255, 190, 100, 23);
-        jbFechar.setMnemonic('F'); // Alt + F
+        jbFechar.setMnemonic('F');
+        jbFechar.addActionListener(e -> {
+            System.exit(0);
+        });
         getContentPane().add(jbFechar);
     }
 

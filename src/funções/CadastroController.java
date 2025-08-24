@@ -1,4 +1,4 @@
-package src.objetos.telas.funções;
+package src.funções;
 
 public class CadastroController {
     
