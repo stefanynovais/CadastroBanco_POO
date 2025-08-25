@@ -4,27 +4,48 @@ package src.objetos;
 
 public class Pessoa {
     private String nome;
-    private int idade;
+    private String endereco;
+    private String telefone;
+    private String cpf;
 
+    public Pessoa(String nome, String endereco, String telefone, String cpf) {
+        this.nome = nome;
+        this.endereco = endereco;
+        this.telefone = telefone;
+        this.cpf = cpf;
+    }
+
+    //métodos getters e setters
     public String getNome() {
         return this.nome;
     }
-
     public void setNome(String nome) {
         this.nome = nome;
     }
 
-    public int getIdade() {
-        return this.idade;
+    public String getEndereco() {
+        return this.endereco;
+    }
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
     }
 
-    public void setIdade(int idade) {
-        this.idade = idade;
+    public String getTelefone() {
+        return this.telefone;
+    }
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 
-    //métodos que podem ser sobreescritos
+    public String getCpf() {
+        return this.cpf;
+    }
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
 
-     public void gravar() {
+    //métodos para sobreescrever
+    public void gravar() {
         System.out.println("Gravando pessoa no sistema...");
     }
 
