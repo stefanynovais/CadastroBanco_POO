@@ -1,5 +1,6 @@
 package telas;
 
+import funções.CadastroController; //importando a classe que vai manipular os dados
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
 
@@ -8,38 +9,41 @@ import java.awt.Toolkit;
 import java.text.ParseException;
 
 public class Janela extends JFrame {
+    private CadastroController controller; // controlador que está gerenciando a lógica de cadastro dos clientes
+
     // Componentes
     private JLabel jlAgencia;
-    private JTextField jtfAgencia;
+    private JTextField jtfAgencia; // Campo de texto para o código da agência
     private JLabel jlConta;
-    private JTextField jtfConta;
-    private JSeparator jSeparator01;
+    private JTextField jtfConta; // Campo de texto para o número da conta
+    private JSeparator jSeparator01; // Linha separadora visual
     private JLabel jlNome;
-    private JTextField jtfNome;
+    private JTextField jtfNome; // Campo de texto para o nome do cliente
     private JLabel jlEndereco;
-    private JTextField jtfEndereco;
+    private JTextField jtfEndereco; // Campo de texto para o endereço
     private JLabel jlTelefone;
-    private JTextField jtfTelefone;
+    private JTextField jtfTelefone; // Campo de texto para o telefone
     private JLabel jlCpf;
-    private JTextField jtfCpf;
+    private JTextField jtfCpf; // Campo de texto para o CPF
     private JRadioButton jrbCorrente;
-    private JRadioButton jrbPoupanca;
-    private ButtonGroup bgContas;
-    private JSeparator jSeparator02;
+    private JRadioButton jrbPoupanca; // Botões de seleção para tipo de conta
+    private ButtonGroup bgContas; // Agrupa os radio buttons para permitir apenas uma seleção
+    private JSeparator jSeparator02; // Linha separadora visual
     private JButton jbConsultar;
     private JButton jbAtualizar;
-    private JButton jbFechar;
+    private JButton jbFechar; // Botões de ação
 
     // Construtor
     public Janela() {
+        this.controller = new CadastroController(); // inicializa o controller
         setTitle("Java Swing - Desenvolvimento de Sistemas");
         setSize(400, 255);
         setResizable(false);
         getContentPane().setLayout(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        centralizar();
+        centralizar(); // centralizando a janela na tela
 
-        inicializarComponentes();
+        inicializarComponentes(); // esse método vai criar e adicionar todos os componentes
     }
 
     private void centralizar() {
@@ -56,21 +60,22 @@ public class Janela extends JFrame {
     }
 
     private void inicializarComponentes() {
+
         // Agência
         jlAgencia = new JLabel("Código da Agência");
         jlAgencia.setBounds(10, 10, 110, 18);
         getContentPane().add(jlAgencia);
 
-        try { 
-            MaskFormatter formato = new MaskFormatter("####");
-            formato.setPlaceholderCharacter('_'); 
+        try {
+            MaskFormatter formato = new MaskFormatter("####"); // mascara de quatro dígitos
+            formato.setPlaceholderCharacter('_');
 
-            JFormattedTextField jtfAgencia = new JFormattedTextField(formato);
+            jtfAgencia = new JFormattedTextField(formato);// inicializa o campo de texto já com a máscara
             jtfAgencia.setBounds(125, 10, 50, 20);
-            getContentPane().add(jtfAgencia);
+            getContentPane().add(jtfAgencia); // adiciona à janela
 
-        } catch (ParseException e) { 
-            e.printStackTrace(); 
+        } catch (ParseException e) { // trata os erros das máscaras
+            e.printStackTrace();
         }
 
         // Conta
@@ -78,18 +83,17 @@ public class Janela extends JFrame {
         jlConta.setBounds(205, 10, 105, 18);
         getContentPane().add(jlConta);
 
-        try { 
+        try {
             MaskFormatter formato = new MaskFormatter("######-#");
-            formato.setPlaceholderCharacter('_'); 
+            formato.setPlaceholderCharacter('_');
 
-            JFormattedTextField jtfConta = new JFormattedTextField(formato);
+            jtfConta = new JFormattedTextField(formato);
             jtfConta.setBounds(315, 10, 60, 20);
             getContentPane().add(jtfConta);
 
-        } catch (ParseException e) { 
-            e.printStackTrace(); 
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
-
 
         // Separador 1
         jSeparator01 = new JSeparator();
@@ -99,7 +103,7 @@ public class Janela extends JFrame {
         // Nome
         jlNome = new JLabel("Nome:");
         jlNome.setBounds(10, 50, 60, 18);
-        jlNome.setHorizontalAlignment(SwingConstants.RIGHT);
+        jlNome.setHorizontalAlignment(SwingConstants.RIGHT); // alinha o texto à direita
         getContentPane().add(jlNome);
 
         jtfNome = new JTextField();
@@ -121,45 +125,43 @@ public class Janela extends JFrame {
         jlTelefone.setBounds(10, 100, 60, 18);
         jlTelefone.setHorizontalAlignment(SwingConstants.RIGHT);
         getContentPane().add(jlTelefone);
-        try { 
+        try {
             MaskFormatter formato = new MaskFormatter("(##) #####-####");
-            formato.setPlaceholderCharacter('_'); 
+            formato.setPlaceholderCharacter('_');
 
-            JFormattedTextField jtfTelefone = new JFormattedTextField(formato);
+            jtfTelefone = new JFormattedTextField(formato);
             jtfTelefone.setBounds(75, 100, 300, 20);
             getContentPane().add(jtfTelefone);
 
             add(jtfTelefone);
 
-        } catch (ParseException e) { 
-            e.printStackTrace(); 
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
-
 
         // CPF
         jlCpf = new JLabel("CPF:");
         jlCpf.setBounds(10, 125, 60, 18);
         jlCpf.setHorizontalAlignment(SwingConstants.RIGHT);
         getContentPane().add(jlCpf);
-        try { 
+        try {
             MaskFormatter formato = new MaskFormatter("###.###.###-##");
-            formato.setPlaceholderCharacter('_'); 
+            formato.setPlaceholderCharacter('_');
 
-            JFormattedTextField jtfCpf = new JFormattedTextField(formato);
+            jtfCpf = new JFormattedTextField(formato);
             jtfCpf.setBounds(75, 125, 300, 20);
             getContentPane().add(jtfCpf);
 
-        } catch (ParseException e) { 
-            e.printStackTrace(); 
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
-
 
         // Radio Buttons
         jrbCorrente = new JRadioButton("Conta Corrente");
         jrbCorrente.setBounds(100, 150, 111, 20);
-        jrbCorrente.setMnemonic('C');
-        jrbCorrente.setSelected(true);
-        jrbCorrente.addActionListener(e -> {
+        jrbCorrente.setMnemonic('C'); // cria o atalho da tecla
+        jrbCorrente.setSelected(true); // seleciona por padrão
+        jrbCorrente.addActionListener(e -> { // indica uma ação ao selecionar o botão
             JOptionPane.showMessageDialog(this, "Conta Corrente selecionada!");
         });
 
@@ -173,6 +175,7 @@ public class Janela extends JFrame {
         });
         getContentPane().add(jrbPoupanca);
 
+        // agrupando os radios buttons para permitir a seleção
         bgContas = new ButtonGroup();
         bgContas.add(jrbCorrente);
         bgContas.add(jrbPoupanca);
@@ -182,62 +185,27 @@ public class Janela extends JFrame {
         jSeparator02.setBounds(10, 180, 365, 10);
         getContentPane().add(jSeparator02);
 
-        
         // Botões
 
-HEAD
-      //Consultar
-jbConsultar = new JButton("Consultar");
-jbConsultar.setBounds(35, 190, 100, 23);
-jbConsultar.setMnemonic('S');
-jbConsultar.addActionListener(e -> {
-    JOptionPane.showMessageDialog(this, "Consultando dados...");
-});
-getContentPane().add(jbConsultar);
-
-//Atualizar
-jbAtualizar = new JButton("Atualizar");
-jbAtualizar.setBounds(145, 190, 100, 23);
-jbAtualizar.setMnemonic('A');
-jbAtualizar.setEnabled(false);
-getContentPane().add(jbAtualizar);
-
-jbAtualizar.addActionListener(e -> {
-    String agencia = jtfAgencia.getText();
-    String conta = jtfConta.getText();
-    String nome = jtfNome.getText();
-    String endereco = jtfEndereco.getText();
-    String telefone = jtfTelefone.getText();
-    String cpf = jtfCpf.getText();
-    String tipoConta = jrbCorrente.isSelected() ? "Conta Corrente" : "Conta Poupança";
-
-    JOptionPane.showMessageDialog(this,
-            "Agência: " + agencia +
-                    "\nConta: " + conta +
-                    "\nNome: " + nome +
-                    "\nEndereço: " + endereco +
-                    "\nTelefone: " + telefone +
-                    "\nCPF: " + cpf +
-                    "\nTipo: " + tipoConta,
-                     "Atualização", JOptionPane.INFORMATION_MESSAGE);
-
-    jbAtualizar.setEnabled(true);
-});
-
-        //Consultar
+        // Consultar
         jbConsultar = new JButton("Consultar");
         jbConsultar.setBounds(35, 190, 100, 23);
-        jbConsultar.setMnemonic('S');
+        jbConsultar.setMnemonic('S');// atalho S
+        getContentPane().add(jbConsultar);
         jbConsultar.addActionListener(e -> {
-            JOptionPane.showMessageDialog(this, "Consultando dados...");
+            // lê os valores digitados
             String agencia = jtfAgencia.getText();
             String conta = jtfConta.getText();
             String nome = jtfNome.getText();
             String endereco = jtfEndereco.getText();
             String telefone = jtfTelefone.getText();
             String cpf = jtfCpf.getText();
-            String tipoConta = jrbCorrente.isSelected() ? "Conta Corrente" : "Conta Poupança";
+            boolean ehCorrente = jrbCorrente.isSelected();
 
+            // chama o controller
+            controller.criarCliente(nome, endereco, telefone, cpf, agencia, conta, ehCorrente);
+
+            // exibe os dados do cliente cadastrado
             JOptionPane.showMessageDialog(this,
                     "Agência: " + agencia +
                             "\nConta: " + conta +
@@ -245,27 +213,37 @@ jbAtualizar.addActionListener(e -> {
                             "\nEndereço: " + endereco +
                             "\nTelefone: " + telefone +
                             "\nCPF: " + cpf +
-                            "\nTipo: " + tipoConta);
-        });
-        getContentPane().add(jbConsultar);
+                            "\nTipo: " + (ehCorrente ? "Conta Corrente" : "Conta Poupança"),
+                    "Cliente Cadastrado", JOptionPane.INFORMATION_MESSAGE);
 
-        //Atualizar
+            jbAtualizar.setEnabled(true); // libera atualização
+        });
+
+        // Atualizar
         jbAtualizar = new JButton("Atualizar");
         jbAtualizar.setBounds(145, 190, 100, 23);
-        jbAtualizar.setMnemonic('A');
-        jbAtualizar.setEnabled(false);
-        jbAtualizar.addActionListener(e -> {
-            JOptionPane.showMessageDialog(this, "Atualizando os dados...");
-        });
+        jbAtualizar.setMnemonic('A');// atalho A
+        jbAtualizar.setEnabled(false); // começa desabilitado, e só é habilitado quando se há um cliente existente
         getContentPane().add(jbAtualizar);
 
+        jbAtualizar.addActionListener(e -> {
+            // atualiza endereço e telefone no controller
+            String novoEndereco = jtfEndereco.getText();
+            String novoTelefone = jtfTelefone.getText();
 
-        //Fechar
+            controller.atualizarCliente(novoEndereco, novoTelefone);
+
+            JOptionPane.showMessageDialog(this,
+                    "Dados atualizados com sucesso!",
+                    "Atualizar", JOptionPane.INFORMATION_MESSAGE);
+        });
+
+        // Fechar
         jbFechar = new JButton("Fechar");
         jbFechar.setBounds(255, 190, 100, 23);
-        jbFechar.setMnemonic('F');
+        jbFechar.setMnemonic('F');// atalho F
         jbFechar.addActionListener(e -> {
-            System.exit(0);
+            System.exit(0); // encerrando a aplicação
         });
         getContentPane().add(jbFechar);
     }

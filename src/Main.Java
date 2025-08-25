@@ -1,4 +1,7 @@
-import src.telas.Janela;
+
+
+import telas.Janela;
+import funções.CadastroController;
 
 public class Main {
     public static void main(String[] args) {

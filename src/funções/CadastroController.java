@@ -1,9 +1,9 @@
 //essa classe vai receber informações da tela do usuário, criar e manipular os objetos do projeto e retornar informações para mostrar na tela.
 //também vai fazer a ponte entre a tela e o objeto
 
-package src.funções;
+package funções;
 
-import src.objetos.*; //importa os objetos para poder manipulá-los
+import objetos.*; //importa os objetos para poder manipulá-los
 
 public class CadastroController {
       private Cliente cliente; //aqui a gente guarda um cliente que está sendo manipulado

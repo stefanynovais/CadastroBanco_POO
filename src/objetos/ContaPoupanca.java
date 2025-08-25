@@ -1,4 +1,4 @@
-package src.objetos;
+package objetos;
 
 public class ContaPoupanca extends Conta {
     private double rendimento;

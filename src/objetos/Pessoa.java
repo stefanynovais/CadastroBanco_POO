@@ -1,6 +1,6 @@
 //classe base: classe "mãe" para todos os outros objetos
 
-package src.objetos;
+package objetos;
 
 public class Pessoa {
     private String nome;

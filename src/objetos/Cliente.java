@@ -1,4 +1,4 @@
-package src.objetos;
+package objetos;
 
     public class Cliente extends Pessoa {
       private Conta conta;

@@ -1,4 +1,4 @@
-package src.objetos;
+package objetos;
 
 public class ContaCorrente extends Conta {
     private double limite;
