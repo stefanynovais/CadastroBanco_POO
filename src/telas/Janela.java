@@ -1,8 +1,11 @@
 package telas;
 
 import javax.swing.*;
+import javax.swing.text.MaskFormatter;
+
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.text.ParseException;
 
 public class Janela extends JFrame {
     // Componentes
@@ -58,18 +61,35 @@ public class Janela extends JFrame {
         jlAgencia.setBounds(10, 10, 110, 18);
         getContentPane().add(jlAgencia);
 
-        jtfAgencia = new JTextField();
-        jtfAgencia.setBounds(125, 10, 50, 20);
-        getContentPane().add(jtfAgencia);
+        try { 
+            MaskFormatter formato = new MaskFormatter("####");
+            formato.setPlaceholderCharacter('_'); 
+
+            JFormattedTextField jtfAgencia = new JFormattedTextField(formato);
+            jtfAgencia.setBounds(125, 10, 50, 20);
+            getContentPane().add(jtfAgencia);
+
+        } catch (ParseException e) { 
+            e.printStackTrace(); 
+        }
 
         // Conta
         jlConta = new JLabel("Número da Conta");
         jlConta.setBounds(205, 10, 105, 18);
         getContentPane().add(jlConta);
 
-        jtfConta = new JTextField();
-        jtfConta.setBounds(315, 10, 60, 20);
-        getContentPane().add(jtfConta);
+        try { 
+            MaskFormatter formato = new MaskFormatter("######-#");
+            formato.setPlaceholderCharacter('_'); 
+
+            JFormattedTextField jtfConta = new JFormattedTextField(formato);
+            jtfConta.setBounds(315, 10, 60, 20);
+            getContentPane().add(jtfConta);
+
+        } catch (ParseException e) { 
+            e.printStackTrace(); 
+        }
+
 
         // Separador 1
         jSeparator01 = new JSeparator();
@@ -101,20 +121,38 @@ public class Janela extends JFrame {
         jlTelefone.setBounds(10, 100, 60, 18);
         jlTelefone.setHorizontalAlignment(SwingConstants.RIGHT);
         getContentPane().add(jlTelefone);
+        try { 
+            MaskFormatter formato = new MaskFormatter("(##) #####-####");
+            formato.setPlaceholderCharacter('_'); 
 
-        jtfTelefone = new JTextField();
-        jtfTelefone.setBounds(75, 100, 300, 20);
-        getContentPane().add(jtfTelefone);
+            JFormattedTextField jtfTelefone = new JFormattedTextField(formato);
+            jtfTelefone.setBounds(75, 100, 300, 20);
+            getContentPane().add(jtfTelefone);
+
+            add(jtfTelefone);
+
+        } catch (ParseException e) { 
+            e.printStackTrace(); 
+        }
+
 
         // CPF
         jlCpf = new JLabel("CPF:");
         jlCpf.setBounds(10, 125, 60, 18);
         jlCpf.setHorizontalAlignment(SwingConstants.RIGHT);
         getContentPane().add(jlCpf);
+        try { 
+            MaskFormatter formato = new MaskFormatter("###.###.###-##");
+            formato.setPlaceholderCharacter('_'); 
 
-        jtfCpf = new JTextField();
-        jtfCpf.setBounds(75, 125, 300, 20);
-        getContentPane().add(jtfCpf);
+            JFormattedTextField jtfCpf = new JFormattedTextField(formato);
+            jtfCpf.setBounds(75, 125, 300, 20);
+            getContentPane().add(jtfCpf);
+
+        } catch (ParseException e) { 
+            e.printStackTrace(); 
+        }
+
 
         // Radio Buttons
         jrbCorrente = new JRadioButton("Conta Corrente");
@@ -147,6 +185,7 @@ public class Janela extends JFrame {
         
         // Botões
 
+HEAD
       //Consultar
 jbConsultar = new JButton("Consultar");
 jbConsultar.setBounds(35, 190, 100, 23);
@@ -184,6 +223,42 @@ jbAtualizar.addActionListener(e -> {
 
     jbAtualizar.setEnabled(true);
 });
+
+        //Consultar
+        jbConsultar = new JButton("Consultar");
+        jbConsultar.setBounds(35, 190, 100, 23);
+        jbConsultar.setMnemonic('S');
+        jbConsultar.addActionListener(e -> {
+            JOptionPane.showMessageDialog(this, "Consultando dados...");
+            String agencia = jtfAgencia.getText();
+            String conta = jtfConta.getText();
+            String nome = jtfNome.getText();
+            String endereco = jtfEndereco.getText();
+            String telefone = jtfTelefone.getText();
+            String cpf = jtfCpf.getText();
+            String tipoConta = jrbCorrente.isSelected() ? "Conta Corrente" : "Conta Poupança";
+
+            JOptionPane.showMessageDialog(this,
+                    "Agência: " + agencia +
+                            "\nConta: " + conta +
+                            "\nNome: " + nome +
+                            "\nEndereço: " + endereco +
+                            "\nTelefone: " + telefone +
+                            "\nCPF: " + cpf +
+                            "\nTipo: " + tipoConta);
+        });
+        getContentPane().add(jbConsultar);
+
+        //Atualizar
+        jbAtualizar = new JButton("Atualizar");
+        jbAtualizar.setBounds(145, 190, 100, 23);
+        jbAtualizar.setMnemonic('A');
+        jbAtualizar.setEnabled(false);
+        jbAtualizar.addActionListener(e -> {
+            JOptionPane.showMessageDialog(this, "Atualizando os dados...");
+        });
+        getContentPane().add(jbAtualizar);
+
 
         //Fechar
         jbFechar = new JButton("Fechar");
